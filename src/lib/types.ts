@@ -49,3 +49,24 @@ export interface Unit {
   topics: Topic[];
   locked?: boolean;
 }
+
+export interface CodeSnippet {
+  lang: "java" | "cpp";
+  code: string;
+}
+
+export interface BankQuestion {
+  id: string;
+  kind: "theory" | "lab";
+  topic: string;
+  marks: number;
+  difficulty: "Easy" | "Medium";
+  exam: string[];
+  prompt: string;
+  promptCode?: CodeSnippet;
+  /** Theory: model-answer key points. Lab: approach / hint bullets. */
+  answer?: string[];
+  /** Lab only: full worked solution. */
+  solutionCode?: CodeSnippet;
+  sampleIO?: string;
+}

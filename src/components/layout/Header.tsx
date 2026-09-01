@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Moon, Sun, Code2 } from "lucide-react";
+import { Moon, Sun, Code2, GraduationCap } from "lucide-react";
 import { useProgress } from "@/lib/progress";
 import { totalTopicCount } from "@/content/units";
 import { useEffect, useMemo } from "react";
@@ -34,6 +34,15 @@ export function Header() {
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-5">
+          <Link
+            to="/question-bank"
+            className="flex items-center gap-1.5 rounded-full border border-brand-500/30 bg-brand-50 px-3 py-1.5 text-xs font-semibold text-brand-600 transition hover:bg-brand-500/15 dark:bg-brand-500/10 dark:text-brand-400"
+          >
+            <GraduationCap size={14} />
+            <span className="hidden sm:inline">Question Bank</span>
+            <span className="sm:hidden">Q. Bank</span>
+          </Link>
+
           <div className="hidden items-center gap-2 sm:flex">
             <div className="h-1.5 w-28 overflow-hidden rounded-full bg-surface-2">
               <div
