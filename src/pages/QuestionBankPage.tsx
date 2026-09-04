@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, BookOpen, FlaskConical, Info } from "lucide-react";
+import { ArrowLeft, BookOpen, FlaskConical, Info, Target } from "lucide-react";
 import { theoryQuestions, labQuestions } from "@/content/questionBank";
 import { QuestionCard } from "@/components/questionbank/QuestionCard";
 
@@ -34,7 +34,18 @@ export function QuestionBankPage() {
         <span>
           <strong className="text-ink">Theory</strong> covers Chapter 1 in full, plus Encapsulation, Abstraction
           and Constructors from Chapter 2, and Conditions. <strong className="text-ink">Lab</strong> covers Scanner,
-          conditions, all data types, and plain functions/variables — no classes/objects yet.
+          conditions, all data types, functions/variables, arrays, and a first taste of classes/objects through
+          short case studies.
+        </span>
+      </div>
+
+      <div className="mt-3 flex items-start gap-2 rounded-lg border border-cyan-400/25 bg-cyan-400/[0.06] p-3 text-[13px] text-ink-dim">
+        <Target size={15} className="mt-0.5 shrink-0 text-cyan-500" />
+        <span>
+          This bank covers the large majority of what's tested in M1 — most paper questions are pulled from
+          here directly, some lightly reworded. Expect one or two questions on the actual paper that vary the
+          numbers or wording slightly (e.g. a different case study, a different array size) rather than matching
+          word-for-word — practice the <em>pattern</em>, not just the exact text.
         </span>
       </div>
 

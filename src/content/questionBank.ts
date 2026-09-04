@@ -452,10 +452,37 @@ if (marks >= 90) {
       "They work together — overloading provides the multiple constructors, and this(...) lets the simpler ones delegate to a more complete one.",
     ],
   },
+  {
+    id: "th-27",
+    kind: "theory",
+    topic: "Constructors",
+    marks: 2,
+    difficulty: "Easy",
+    exam: ["M1"],
+    prompt: "What is a constructor? State its purpose in a class.",
+    answer: [
+      "A constructor is a special method that runs automatically when an object is created with new, and has the same name as the class with no return type.",
+      "Its purpose is to initialize the object's fields into a valid starting state at the moment of creation.",
+    ],
+  },
+  {
+    id: "th-28",
+    kind: "theory",
+    topic: "Abstraction",
+    marks: 2,
+    difficulty: "Easy",
+    exam: ["M1"],
+    prompt: "Define Abstraction with a suitable real-world analogy.",
+    answer: [
+      "Abstraction means exposing only the essential features of something while hiding the internal implementation details.",
+      "Analogy: driving a car — pressing the accelerator is all the driver needs to know; the fuel injection and combustion happening underneath stay hidden.",
+    ],
+  },
 ];
 
-// M1 (10 marks) scope — Lab: Scanner, conditions, all datatypes, and plain
-// functions/variables only (no classes/objects yet — that starts after M1).
+// M1 (10 marks) scope — Lab: Scanner, conditions, all datatypes, plain
+// functions/variables, arrays, and a first taste of classes/objects via
+// short case studies (matching what the M1 lab paper actually tests).
 export const labQuestions: BankQuestion[] = [
   {
     id: "lab-1",
@@ -942,6 +969,316 @@ public class Main {
         double pi = 3.99;
         int truncated = (int) pi;   // explicit narrowing: double -> int
         System.out.println("Explicit double to int: " + truncated); // 3, not 4 — truncated, not rounded
+    }
+}`,
+    },
+  },
+  {
+    id: "lab-15",
+    kind: "lab",
+    topic: "Arrays",
+    marks: 5,
+    difficulty: "Medium",
+    exam: ["M1"],
+    prompt:
+      "Write a Java program that reads 6 integers into an array using Scanner, and displays: (a) the largest and smallest number in the array, (b) the sum and average of all elements, (c) the count of even and odd numbers in the array. Use loops and conditional statements appropriately.",
+    answer: [
+      "One single pass through the array with a for loop is enough — update running max, min, sum, and even/odd counters as you go, instead of sorting.",
+      "Initialize max and min to the first element (index 0) before the loop, then compare from index 1 onward.",
+    ],
+    solutionCode: {
+      lang: "java",
+      code: `import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[6];
+
+        System.out.println("Enter 6 integers:");
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int max = arr[0], min = arr[0], sum = 0, evenCount = 0, oddCount = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) max = arr[i];
+            if (arr[i] < min) min = arr[i];
+            sum += arr[i];
+            if (arr[i] % 2 == 0) evenCount++; else oddCount++;
+        }
+
+        double average = (double) sum / arr.length;
+
+        System.out.println("Largest: " + max);
+        System.out.println("Smallest: " + min);
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + average);
+        System.out.println("Even count: " + evenCount);
+        System.out.println("Odd count: " + oddCount);
+    }
+}`,
+    },
+  },
+  {
+    id: "lab-16",
+    kind: "lab",
+    topic: "Arrays",
+    marks: 5,
+    difficulty: "Medium",
+    exam: ["M1"],
+    prompt:
+      "Write a Java program that reads 6 temperature readings (in °C, as float values) recorded over a week into an array using Scanner, and displays: (a) the highest and lowest temperature recorded, (b) the average temperature for the week, (c) the number of days the temperature was above the weekly average. Use loops and conditional statements appropriately.",
+    answer: [
+      "This needs two passes over the array: a first pass to find the max, min, and total (so you can compute the average), and a second pass to count how many elements exceed that average — you cannot count 'above average' until the average itself is known.",
+    ],
+    solutionCode: {
+      lang: "java",
+      code: `import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        float[] temp = new float[6];
+
+        System.out.println("Enter 6 temperature readings (°C):");
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = sc.nextFloat();
+        }
+
+        float max = temp[0], min = temp[0], sum = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] > max) max = temp[i];
+            if (temp[i] < min) min = temp[i];
+            sum += temp[i];
+        }
+        float average = sum / temp.length;
+
+        int aboveAverage = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] > average) aboveAverage++;
+        }
+
+        System.out.println("Highest: " + max);
+        System.out.println("Lowest: " + min);
+        System.out.println("Average: " + average);
+        System.out.println("Days above average: " + aboveAverage);
+    }
+}`,
+    },
+  },
+  {
+    id: "lab-17",
+    kind: "lab",
+    topic: "Arrays",
+    marks: 3,
+    difficulty: "Easy",
+    exam: ["M1"],
+    prompt: "Write a program to read 5 integers into an array using Scanner and print them in reverse order.",
+    answer: ["Loop from the last index (length - 1) down to 0, printing each element as you go — no second array needed."],
+    solutionCode: {
+      lang: "java",
+      code: `import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] arr = new int[5];
+
+        System.out.println("Enter 5 integers:");
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.println("Reversed:");
+        for (int i = arr.length - 1; i >= 0; i--) {
+            System.out.println(arr[i]);
+        }
+    }
+}`,
+    },
+  },
+  {
+    id: "lab-18",
+    kind: "lab",
+    topic: "Classes & Objects (Case Study)",
+    marks: 5,
+    difficulty: "Medium",
+    exam: ["M1"],
+    prompt:
+      "A cinema wants a simple program to bill movie tickets. Create a class Movie with data members: movie name (String), ticket price (double), and number of seats booked (int). Write member functions to: (a) read the movie name and ticket price using Scanner, (b) book tickets by accepting the number of seats and calculating the total amount (price × seats), applying a 10% discount on the total if 5 or more seats are booked, (c) display the movie name, seats booked, and final amount payable. Create an object of the class in main and demonstrate all the above functions.",
+    answer: [
+      "Keep 'total amount' as a field updated inside bookTickets(), so display() can just print it rather than recomputing.",
+      "Apply the discount with a simple if check: if (seatsBooked >= 5) total *= 0.9;",
+    ],
+    solutionCode: {
+      lang: "java",
+      code: `import java.util.Scanner;
+
+class Movie {
+    String name;
+    double price;
+    int seatsBooked;
+    double totalAmount;
+
+    void readDetails(Scanner sc) {
+        System.out.print("Enter movie name: ");
+        name = sc.nextLine();
+        System.out.print("Enter ticket price: ");
+        price = sc.nextDouble();
+    }
+
+    void bookTickets(int seats) {
+        seatsBooked = seats;
+        totalAmount = price * seats;
+        if (seatsBooked >= 5) {
+            totalAmount *= 0.9; // 10% discount
+        }
+    }
+
+    void display() {
+        System.out.println("Movie: " + name);
+        System.out.println("Seats booked: " + seatsBooked);
+        System.out.println("Amount payable: " + totalAmount);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Movie m = new Movie();
+        m.readDetails(sc);
+
+        System.out.print("Enter number of seats to book: ");
+        int seats = sc.nextInt();
+        m.bookTickets(seats);
+        m.display();
+    }
+}`,
+    },
+  },
+  {
+    id: "lab-19",
+    kind: "lab",
+    topic: "Classes & Objects (Case Study)",
+    marks: 5,
+    difficulty: "Medium",
+    exam: ["M1"],
+    prompt:
+      "A school wants a simple program to process a student's result. Create a class Student with data members: name (String), roll number (int), and marks in 3 subjects (int). Write member functions to: (a) read the name, roll number, and marks in the 3 subjects using Scanner, (b) calculate the total marks, percentage, and assign a grade — 'A' for percentage ≥ 75, 'B' for 60–74, 'C' for 40–59, otherwise 'F', (c) display the student's name, roll number, total marks, percentage, and grade. Create an object of the class in main and demonstrate all the above functions.",
+    answer: [
+      "percentage = total / 3.0 — remember to divide by a double (3.0), not int 3, or the decimal part gets truncated.",
+      "Order the grade conditions from highest threshold to lowest, same pattern as any if-else-if grading question.",
+    ],
+    solutionCode: {
+      lang: "java",
+      code: `import java.util.Scanner;
+
+class Student {
+    String name;
+    int rollNo;
+    int marks1, marks2, marks3;
+    int total;
+    double percentage;
+    char grade;
+
+    void readDetails(Scanner sc) {
+        System.out.print("Enter name: ");
+        name = sc.nextLine();
+        System.out.print("Enter roll number: ");
+        rollNo = sc.nextInt();
+        System.out.print("Enter marks in 3 subjects: ");
+        marks1 = sc.nextInt();
+        marks2 = sc.nextInt();
+        marks3 = sc.nextInt();
+    }
+
+    void calculateResult() {
+        total = marks1 + marks2 + marks3;
+        percentage = total / 3.0;
+
+        if (percentage >= 75) grade = 'A';
+        else if (percentage >= 60) grade = 'B';
+        else if (percentage >= 40) grade = 'C';
+        else grade = 'F';
+    }
+
+    void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Roll No: " + rollNo);
+        System.out.println("Total: " + total);
+        System.out.println("Percentage: " + percentage);
+        System.out.println("Grade: " + grade);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Student s = new Student();
+        s.readDetails(sc);
+        s.calculateResult();
+        s.display();
+    }
+}`,
+    },
+  },
+  {
+    id: "lab-20",
+    kind: "lab",
+    topic: "Classes & Objects (Case Study)",
+    marks: 5,
+    difficulty: "Medium",
+    exam: ["M1"],
+    prompt:
+      "A bookstore wants a simple program to manage inventory. Create a class Book with data members: title (String), author (String), price (double), and quantity in stock (int). Write member functions to: (a) read the book details using Scanner, (b) calculate the total inventory value (price × quantity), applying a 5% price increase before calculating if the quantity in stock is below 10 (low stock), (c) display all book details along with the total inventory value. Create an object of the class in main and demonstrate all the above functions.",
+    answer: [
+      "This follows the exact same shape as the Movie and Student case studies: readDetails() → a calculate method that applies one conditional rule → display(). Once you can write one of these confidently, the others are the same pattern with different fields.",
+    ],
+    solutionCode: {
+      lang: "java",
+      code: `import java.util.Scanner;
+
+class Book {
+    String title, author;
+    double price;
+    int quantity;
+    double totalValue;
+
+    void readDetails(Scanner sc) {
+        System.out.print("Enter title: ");
+        title = sc.nextLine();
+        System.out.print("Enter author: ");
+        author = sc.nextLine();
+        System.out.print("Enter price: ");
+        price = sc.nextDouble();
+        System.out.print("Enter quantity in stock: ");
+        quantity = sc.nextInt();
+    }
+
+    void calculateInventoryValue() {
+        double effectivePrice = price;
+        if (quantity < 10) {
+            effectivePrice = price * 1.05; // 5% increase for low stock
+        }
+        totalValue = effectivePrice * quantity;
+    }
+
+    void display() {
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Total inventory value: " + totalValue);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Book b = new Book();
+        b.readDetails(sc);
+        b.calculateInventoryValue();
+        b.display();
     }
 }`,
     },
