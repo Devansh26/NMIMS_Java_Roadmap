@@ -28,6 +28,7 @@ export interface QuizQuestion {
   options: string[];
   correctIndex: number;
   explanation: string;
+  code?: CodeSnippet;
 }
 
 export interface Topic {
@@ -69,4 +70,30 @@ export interface BankQuestion {
   /** Lab only: full worked solution. */
   solutionCode?: CodeSnippet;
   sampleIO?: string;
+}
+
+export const QUIZ_TOPICS = [
+  "Conditions",
+  "Loops",
+  "this Keyword",
+  "Inheritance",
+  "Functions",
+  "Scanner",
+] as const;
+
+export type QuizTopic = (typeof QUIZ_TOPICS)[number];
+
+export interface QuizBankQuestion extends QuizQuestion {
+  topic: QuizTopic;
+}
+
+export interface MiniProjectOption {
+  id: string;
+  title: string;
+  tagline: string;
+  scenario: string;
+  requirements: string[];
+  suggestedClasses: { name: string; note: string }[];
+  concepts: string[];
+  stretchGoals: string[];
 }

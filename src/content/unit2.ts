@@ -302,6 +302,122 @@ accounts[2] = new BankAccount("Meera", "AC003", 42000);
   },
 
   {
+    id: "this-keyword",
+    title: "The this Keyword",
+    tagline: "How an object refers to itself",
+    minutes: 10,
+    blocks: [
+      {
+        kind: "p",
+        text: "**this** is a reference variable, automatically available inside every instance method and constructor, that always points to the current object — the specific object the method was called on. You have already used it, quietly, in almost every constructor written so far.",
+      },
+      { kind: "heading", text: "Job #1 — Resolving a shadowed field" },
+      {
+        kind: "p",
+        text: "The single most common use of `this` is inside a constructor or setter where a parameter is deliberately given the SAME name as the field it initializes. Inside that method, the plain name now refers to the closer parameter, so `this.fieldName` is the only way to reach the field.",
+      },
+      {
+        kind: "code",
+        lang: "java",
+        caption: "Without this — the field is never actually set",
+        code: `class Student {
+    String name;
+
+    Student(String name) {
+        name = name;   // assigns the parameter to itself — the field stays null!
+    }
+}`,
+      },
+      {
+        kind: "code",
+        lang: "java",
+        caption: "With this — unambiguous",
+        code: `class Student {
+    String name;
+
+    Student(String name) {
+        this.name = name;   // this.name = the field, name = the parameter
+    }
+}`,
+      },
+      {
+        kind: "callout",
+        variant: "pitfall",
+        title: "name = name; compiles perfectly fine — and does nothing useful",
+        text: "Java never warns you here. The parameter simply gets assigned to itself, and the object's actual field silently stays at its default value (null for a String). This is one of the most common silent bugs in beginner constructors.",
+      },
+      { kind: "heading", text: "Job #2 — Constructor chaining with this(...)" },
+      {
+        kind: "p",
+        text: "Written WITH parentheses, `this(...)` calls another constructor of the same class, and must be the first statement in the calling constructor. It lets a simpler constructor delegate to a more complete one instead of duplicating initialization logic.",
+      },
+      {
+        kind: "code",
+        lang: "java",
+        caption: "this(...) chaining — covered in more depth in the Constructors topic",
+        code: `class Rectangle {
+    double length, width;
+
+    Rectangle() {
+        this(1, 1);   // delegates to the two-arg constructor below
+    }
+
+    Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+}`,
+      },
+      { kind: "heading", text: "Job #3 — Passing the current object to someone else" },
+      {
+        kind: "p",
+        text: "`this` is also a normal value you can pass around — most often to hand another object a reference to \"me\", so it can call back into the current object later.",
+      },
+      {
+        kind: "code",
+        lang: "java",
+        caption: "Passing this to register the current object",
+        code: `class Button {
+    void registerWith(ClickHandler handler) {
+        handler.attach(this);   // "here is a reference to this exact Button"
+    }
+}`,
+      },
+      {
+        kind: "callout",
+        variant: "exam",
+        title: "What this is NOT",
+        text: "this only exists inside instance methods and constructors — never inside a static method or a static context, because static code isn't tied to any particular object. \"Cannot use this in a static context\" is one of the most common beginner compiler errors, and it's really just Java telling you: there IS no current object here to refer to.",
+      },
+      {
+        kind: "compare",
+        headers: ["Use of this", "What it does"],
+        rows: [
+          ["this.field = value;", "Assigns to the current object's field, resolving a name clash with a parameter"],
+          ["this(...);", "Calls another constructor of the same class (must be the first statement)"],
+          ["someMethod(this);", "Passes a reference to the current object to another method"],
+          ["return this;", "Returns the current object — commonly used to chain method calls"],
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "q-this-1",
+        question: "What does this.side refer to below, when new Box().printSide(9) is called?\n\nclass Box {\n    int side = 5;\n    void printSide(int side) {\n        System.out.println(side);\n        System.out.println(this.side);\n    }\n}",
+        type: "mcq",
+        options: [
+          "9, then 9 — this.side is just another name for the parameter",
+          "5, then 5 — this.side always means the field",
+          "9, then 5 — plain side is the parameter, this.side is the field",
+          "Compilation error — side is ambiguous",
+        ],
+        correctIndex: 2,
+        explanation: "The parameter 'side' shadows the field inside this method. Plain 'side' resolves to the closer parameter (9); this.side explicitly reaches past the shadow to the field (5).",
+      },
+    ],
+  },
+
+  {
     id: "inheritance",
     title: "Inheritance",
     tagline: "Reusing and specializing behaviour through an is-a relationship",

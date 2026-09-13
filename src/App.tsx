@@ -5,6 +5,8 @@ import { HomePage } from "@/pages/HomePage";
 import { UnitPage } from "@/pages/UnitPage";
 import { TopicPage } from "@/pages/TopicPage";
 import { QuestionBankPage } from "@/pages/QuestionBankPage";
+import { QuizBankPage } from "@/pages/QuizBankPage";
+import { MiniProjectPage } from "@/pages/MiniProjectPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 
 function ScrollToTop() {
@@ -25,6 +27,8 @@ function App() {
         <Route path="/unit/:unitId" element={<UnitPage />} />
         <Route path="/unit/:unitId/:topicId" element={<TopicPage />} />
         <Route path="/question-bank" element={<QuestionBankPage />} />
+        <Route path="/quiz-bank" element={<QuizBankPage />} />
+        <Route path="/mini-project" element={<MiniProjectPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

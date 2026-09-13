@@ -3,8 +3,17 @@ import { CheckCircle2, XCircle, RotateCcw, Brain } from "lucide-react";
 import confetti from "canvas-confetti";
 import type { QuizQuestion } from "@/lib/types";
 import { useProgress } from "@/lib/progress";
+import { CodeBlock } from "./CodeBlock";
 
-export function Quiz({ quiz, index }: { quiz: QuizQuestion; index: number }) {
+export function Quiz({
+  quiz,
+  index,
+  labelPrefix = "Quick Check",
+}: {
+  quiz: QuizQuestion;
+  index: number;
+  labelPrefix?: string;
+}) {
   const answer = useProgress((s) => s.quizAnswers[quiz.id]);
   const answerQuiz = useProgress((s) => s.answerQuiz);
   const resetQuiz = useProgress((s) => s.resetQuiz);
@@ -33,7 +42,7 @@ export function Quiz({ quiz, index }: { quiz: QuizQuestion; index: number }) {
       <div className="flex items-center gap-2 border-b border-border/70 bg-white/40 px-4 py-2.5 dark:bg-white/[0.02]">
         <Brain size={15} className="text-brand-500" />
         <span className="text-xs font-semibold uppercase tracking-wide text-brand-600 dark:text-brand-400">
-          Quick Check {index > 0 ? `#${index + 1}` : ""}
+          {labelPrefix} {index > 0 ? `#${index + 1}` : ""}
         </span>
       </div>
       <div className="p-4 sm:p-5">
@@ -44,6 +53,8 @@ export function Quiz({ quiz, index }: { quiz: QuizQuestion; index: number }) {
             </p>
           ))}
         </div>
+
+        {quiz.code && <CodeBlock code={quiz.code.code} lang={quiz.code.lang} />}
 
         <div className="space-y-2">
           {quiz.options.map((opt, i) => {
