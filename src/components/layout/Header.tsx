@@ -5,7 +5,7 @@ import { totalTopicCount } from "@/content/units";
 import { useEffect, useMemo } from "react";
 
 const navLinks = [
-  { to: "/question-bank", label: "M1 Question Bank", short: "M1", icon: GraduationCap },
+  { to: "/question-bank", label: "Question Bank", short: "Q. Bank", icon: GraduationCap },
   { to: "/quiz-bank", label: "Quiz Bank", short: "Quiz", icon: Brain },
   { to: "/mini-project", label: "Mini Project", short: "Project", icon: FolderKanban },
 ];
