@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Moon, Sun, Code2, GraduationCap, Brain, FolderKanban } from "lucide-react";
+import { Moon, Sun, Code2, GraduationCap, Brain, FolderKanban, ClipboardCheck } from "lucide-react";
 import { useProgress } from "@/lib/progress";
 import { totalTopicCount } from "@/content/units";
 import { useEffect, useMemo } from "react";
@@ -8,6 +8,7 @@ const navLinks = [
   { to: "/question-bank", label: "Question Bank", short: "Q. Bank", icon: GraduationCap },
   { to: "/quiz-bank", label: "Quiz Bank", short: "Quiz", icon: Brain },
   { to: "/mini-project", label: "Mini Project", short: "Project", icon: FolderKanban },
+  { to: "/assignments", label: "Assignments", short: "Assign.", icon: ClipboardCheck },
 ];
 
 export function Header() {
@@ -64,7 +65,7 @@ export function Header() {
       </div>
 
       <div className="border-t border-border/70 bg-surface-2/50">
-        <div className="mx-auto flex max-w-6xl items-center gap-2 overflow-x-auto px-4 py-2 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center gap-1.5 overflow-x-auto px-3 py-2 sm:gap-2 sm:px-6">
           {navLinks.map((link) => {
             const Icon = link.icon;
             const active = location.pathname === link.to;
@@ -72,7 +73,7 @@ export function Header() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+                className={`flex shrink-0 items-center gap-1 rounded-full border px-2.5 py-1.5 text-xs font-semibold transition sm:gap-1.5 sm:px-3 ${
                   active
                     ? "border-brand-500 bg-brand-500 text-white"
                     : "border-border bg-surface text-ink-dim hover:border-brand-400/50 hover:text-ink"

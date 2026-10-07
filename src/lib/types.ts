@@ -87,6 +87,31 @@ export interface QuizBankQuestion extends QuizQuestion {
   topic: QuizTopic;
 }
 
+export interface AssignmentPart {
+  id: string;
+  title: string;
+  /** Problem statement; supports `code`, **bold**, *italic* via Prose. */
+  statement: string;
+  requirements: string[];
+  /** Specific screenshots the student must include for this part. */
+  screenshots: string[];
+  sampleRun?: string;
+}
+
+export interface Assignment {
+  id: string;
+  number: number;
+  title: string;
+  topic: string;
+  marks: number;
+  summary: string;
+  /** Concepts students will need to look up on their own. */
+  concepts: string[];
+  parts: AssignmentPart[];
+  /** Shown only when set, e.g. "Fri, 24 Oct, 11:59 PM". */
+  due?: string;
+}
+
 export interface MiniProjectOption {
   id: string;
   title: string;

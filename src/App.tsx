@@ -7,6 +7,7 @@ import { TopicPage } from "@/pages/TopicPage";
 import { QuestionBankPage } from "@/pages/QuestionBankPage";
 import { QuizBankPage } from "@/pages/QuizBankPage";
 import { MiniProjectPage } from "@/pages/MiniProjectPage";
+import { AssignmentsPage } from "@/pages/AssignmentsPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 
 function ScrollToTop() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/question-bank" element={<QuestionBankPage />} />
         <Route path="/quiz-bank" element={<QuizBankPage />} />
         <Route path="/mini-project" element={<MiniProjectPage />} />
+        <Route path="/assignments" element={<AssignmentsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

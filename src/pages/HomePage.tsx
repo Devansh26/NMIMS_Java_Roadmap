@@ -1,4 +1,4 @@
-import { Brain, FolderKanban, NotebookPen } from "lucide-react";
+import { Brain, ClipboardCheck, FolderKanban, NotebookPen } from "lucide-react";
 import { Hero } from "@/components/home/Hero";
 import { AnnouncementBanner } from "@/components/home/AnnouncementBanner";
 import { RoadmapMap } from "@/components/home/RoadmapMap";
@@ -10,12 +10,21 @@ export function HomePage() {
       <Hero />
       <div className="mx-auto max-w-3xl space-y-3 px-4 pb-10">
         <AnnouncementBanner
+          to="/assignments"
+          icon={ClipboardCheck}
+          eyebrow="Lab · 2 × 5 = 10 Marks"
+          title="Assignments 1 and 2 are up"
+          description="Exception handling and file handling — read the submission rules before you start."
+          accent="emerald"
+        />
+        <AnnouncementBanner
           to="/question-bank?exam=M2"
           icon={NotebookPen}
           eyebrow="M2 · Theory · 10 Marks"
           title="M2 Question Bank is live"
           description={`${theoryQuestionsM2.length} practice questions — Strings, Inheritance, Abstraction, Polymorphism, Casting.`}
           accent="brand"
+          delay={0.08}
         />
         <AnnouncementBanner
           to="/quiz-bank"
@@ -24,7 +33,7 @@ export function HomePage() {
           title="Quiz Bank is live"
           description="60 practice MCQs — Conditions, Loops, this, Inheritance, Functions, Scanner."
           accent="cyan"
-          delay={0.08}
+          delay={0.16}
         />
         <AnnouncementBanner
           to="/mini-project"
@@ -33,7 +42,7 @@ export function HomePage() {
           title="Mini Project topics are up"
           description="Two options to choose from — pick one and start designing your classes."
           accent="violet"
-          delay={0.16}
+          delay={0.24}
         />
       </div>
       <RoadmapMap />

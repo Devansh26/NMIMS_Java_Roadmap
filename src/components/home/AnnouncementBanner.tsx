@@ -21,6 +21,12 @@ const accentMap = {
     iconBg: "bg-violet-500",
     arrow: "text-violet-500",
   },
+  emerald: {
+    border: "border-emerald-400/30",
+    gradient: "from-emerald-400/10 via-emerald-400/5 to-transparent",
+    iconBg: "bg-emerald-500",
+    arrow: "text-emerald-500",
+  },
 };
 
 export function AnnouncementBanner({
