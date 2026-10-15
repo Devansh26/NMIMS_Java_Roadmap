@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, BookOpen, FlaskConical, Hourglass, Info, Target } from "lucide-react";
 import { theoryQuestions, labQuestions } from "@/content/questionBank";
 import { theoryQuestionsM2 } from "@/content/questionBankM2";
+import { labQuestionsM2 } from "@/content/questionBankLabM2";
 import { QuestionCard } from "@/components/questionbank/QuestionCard";
 
 type Tab = "theory" | "lab";
@@ -11,7 +12,7 @@ const EXAMS = ["M1", "M2"] as const;
 type Exam = (typeof EXAMS)[number];
 
 const allTheory = [...theoryQuestions, ...theoryQuestionsM2];
-const allLab = [...labQuestions];
+const allLab = [...labQuestions, ...labQuestionsM2];
 
 const examInfo: Record<Exam, { eyebrow: string; intro: string; scope: ReactNode; coverage: ReactNode }> = {
   M1: {
@@ -36,17 +37,20 @@ const examInfo: Record<Exam, { eyebrow: string; intro: string; scope: ReactNode;
   M2: {
     eyebrow: "M2 · 10 Marks",
     intro:
-      "Practice questions for the M2 test — Theory only for now. Lab is a separate paper, so its questions will be added separately. As always, Theory has no coding prompts beyond an example or a snippet to trace.",
+      "Practice questions for the M2 tests. Theory and Lab are graded as separate subjects with separate papers, so they're kept strictly apart here too — Theory has no coding prompts beyond an example or a snippet to trace, and Lab is pure programming.",
     scope: (
       <>
         <strong className="text-ink">Theory</strong> covers Strings, Inheritance, Abstraction (abstract classes and
-        interfaces), Polymorphism, and Casting.
+        interfaces), Polymorphism, and Casting. <strong className="text-ink">Lab</strong> covers Strings and casting
+        programs, inheritance and runtime polymorphism, and abstract classes and interfaces.
       </>
     ),
     coverage: (
       <>
-        Questions follow the paper format — short 2-mark bits and 3-mark descriptive or code-tracing questions. Every
-        model answer explains the <em>why</em>, so practice the pattern behind each one rather than memorising wording.
+        Theory follows the paper format — short 2-mark bits and 3-mark descriptive or code-tracing questions. For Lab,
+        expect a programming problem (Strings and casting) and a class-based case study (inheritance, abstract
+        classes, interfaces). Type out and run every Lab program yourself, then compare with the sample solution —
+        practise the pattern, not just the exact text.
       </>
     ),
   },

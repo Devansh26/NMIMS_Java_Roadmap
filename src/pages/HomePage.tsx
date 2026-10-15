@@ -3,6 +3,7 @@ import { Hero } from "@/components/home/Hero";
 import { AnnouncementBanner } from "@/components/home/AnnouncementBanner";
 import { RoadmapMap } from "@/components/home/RoadmapMap";
 import { theoryQuestionsM2 } from "@/content/questionBankM2";
+import { labQuestionsM2 } from "@/content/questionBankLabM2";
 
 export function HomePage() {
   return (
@@ -20,9 +21,9 @@ export function HomePage() {
         <AnnouncementBanner
           to="/question-bank?exam=M2"
           icon={NotebookPen}
-          eyebrow="M2 · Theory · 10 Marks"
+          eyebrow="M2 · Theory + Lab"
           title="M2 Question Bank is live"
-          description={`${theoryQuestionsM2.length} practice questions — Strings, Inheritance, Abstraction, Polymorphism, Casting.`}
+          description={`${theoryQuestionsM2.length} theory + ${labQuestionsM2.length} lab practice questions — Strings, Inheritance, Abstraction, Polymorphism, Casting.`}
           accent="brand"
           delay={0.08}
         />
